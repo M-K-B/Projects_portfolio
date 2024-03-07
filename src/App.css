@@ -99,7 +99,7 @@ body {
 
 .project-links a {
   display: inline-block;
-  margin: 10px;
+  margin-right: 10px;
   color: #333;
   text-decoration: none;
   padding: 8px 15px;
@@ -167,3 +167,68 @@ body {
   height: 40px;
 }
 
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 20px; /* Adjusted padding for smaller screens */
+  }
+
+  .navbar li {
+    margin-left: 10px; /* Adjusted margin for smaller screens */
+  }
+
+  .section {
+    padding: 30px 0; /* Adjusted padding for smaller screens */
+  }
+
+  .section h2 {
+    margin-bottom: 20px; /* Adjusted margin for smaller screens */
+    font-size: 1.8rem; /* Adjusted font size for smaller screens */
+  }
+
+  .projects {
+    grid-gap: 20px; /* Adjusted grid gap for smaller screens */
+  }
+
+  .project {
+    padding: 20px; /* Adjusted padding for smaller screens */
+  }
+
+  .project h3 {
+    font-size: 1.2rem; /* Adjusted font size for smaller screens */
+  }
+
+  .project img {
+    margin-bottom: 10px; /* Adjusted margin for smaller screens */
+  }
+
+  .project p {
+    font-size: 0.9rem; /* Adjusted font size for smaller screens */
+  }
+
+  .project-links {
+    margin-top: 15px; /* Adjusted margin for smaller screens */
+  }
+
+  .project-links a {
+    padding: 5px 10px; /* Adjusted padding for smaller screens */
+    font-size: 0.9rem; /* Adjusted font size for smaller screens */
+  }
+
+  .footer {
+    padding: 20px 0; /* Adjusted padding for smaller screens */
+  }
+
+  .contact-section {
+    padding: 30px 0; /* Adjusted padding for smaller screens */
+  }
+
+  .contact-info {
+    gap: 10px; /* Adjusted gap for smaller screens */
+  }
+
+  .contact-logo {
+    width: 30px; /* Adjusted width for smaller screens */
+    height: 30px; /* Adjusted height for smaller screens */
+  }
+}
