@@ -39,6 +39,11 @@ const projects = [
       
     ],
   },
+  {
+    title: 'Heart Rate Sensor',
+    description: 'Integrated an Arduino with Circuit Board 7 and the APDS-9008 Light Photo Sensor. Programmed in C++ to measure heart rates.',
+    demoUrl: 'https://youtube.com/shorts/CUWScZbX1ck?si=5XN8tL_J7KChtHaH',
+  },
   
   
   // Add more projects here
