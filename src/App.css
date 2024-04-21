@@ -1,4 +1,10 @@
 /* General styles */
+@font-face {
+  font-family: 'Jersey 25';
+  src: url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
+  font-style: normal;
+}
+
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
@@ -11,33 +17,45 @@ body {
   padding: 0 100px;
 }
 
-.header {
+.container_nav {
   background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   color: #fff;
-  padding: 20px 0;
-  text-align: center;
+  width: 100%;
 }
 
-.header h1 {
+.container_nav h1 {
   margin: 0;
   font-size: 2rem;
+  margin-left: 2rem;
+  font-family: 'Jersey 25', sans-serif; /* Change initialFont to 'Anton' */
+  font-style: normal;
+  font-weight: 800;
+  font-size: 2.75rem;
 }
 
 .navbar {
-  background-color: #333;
+  background-color: #1a1a1a;
   padding: 10px 0;
+  float: right;
 }
 
 .navbar ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  text-align: center;
+  text-align: end;
+  margin-right: 1.5rem;
 }
 
-.navbar li {
+.navbar li,
+p,
+img {
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
 .navbar a {
@@ -45,6 +63,67 @@ body {
   color: #fff;
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.navbar p {
+  font-family: 'Jersey 25', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container_intro {
+  height: 32rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container_intro h1 {
+  color: #fff;
+  font-family: 'Jersey 25', sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.circlePic {
+  border: 0.2rem solid black;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 10rem;
+  overflow: hidden;
+  background-color: white;
+}
+
+.circlePic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-section {
+  margin-top: 0;
+  background-color: #3e3d3d;
+}
+
+.about-section {
+  background-color: #5c5c5c;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.container_about {
+  width: 50%;
+}
+
+.container_about p {
+  color: #fff;
+  font-family: 'Jersey 25', sans-serif;
+  font-weight: 500;
+}
+
+.container_about h2 {
+  color: #fff;
 }
 
 /* Section styles */
@@ -56,7 +135,6 @@ body {
   margin-bottom: 30px;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #333;
   text-align: center;
 }
 
@@ -70,7 +148,7 @@ body {
 .project {
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
 
@@ -165,6 +243,11 @@ body {
 .contact-logo {
   width: 40px;
   height: 40px;
+}
+
+.nav-logo {
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 /* Media queries for responsiveness */

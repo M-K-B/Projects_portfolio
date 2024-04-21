@@ -2,23 +2,28 @@ import React from 'react';
 import './App.css';
 import gitLogo from './assets/git.png';
 import linkedinLogo from './assets/linkedin.png';
+import linkedinLogoWhite from './assets/linkedin-icon_white.png'
+import gitLogoWhite from './assets/git_white.png'
+import profilePic from './assets/memoji.png'
+import { YoutubeFilled, GithubFilled } from '@ant-design/icons';
+import { Card, Space } from 'antd';
 
 const projects = [
   {
-    title: 'RESTful Currency API: Access, Convert & Manage Exchange Rates',
-    description: 'RESTful API for accessing real-time currency exchange rates. Built with Python and leveraging a MySQL database, the API empowers users to retrieve and convert currency information conveniently. With features like filtering and flexible response formats, this API offers a valuable tool for various applications requiring accurate currency data.',
-    status : 'In Progress'
-
+    title: 'RESTful Currency API',
+    description: 'Access, Convert & Manage Exchange Rates : RESTful API for accessing real-time currency exchange rates. Built with Koa.js and leveraging a MySQL database, the API empowers users to retrieve and convert currency information conveniently. Flexible response formats, this API offers a valuable tool for various applications requiring accurate currency data.',
+    status: 'In Progress',
+    demoUrl: 'https://youtu.be/r2ETrv2pbP4'
   },
   {
-    title: '.NET MAUI Online Banking Mobile App ',
-    description: 'Develop a secure and user-friendly online banking application using the .NET MAUI framework, integrating Superbase cloud services for authentication, data storage, and potential real-time updates. Targeting individuals seeking convenient mobile or desktop banking, the application prioritises security and strives for a seamless user experience.',
-    status : 'In Progress'
-
+    title: '.NET MAUI Online Parking App',
+    description: 'Develop a secure and user-friendly online parking application using the .NET MAUI framework, integrating Superbase cloud services for authentication, data storage, and potential real-time updates. Targeting individuals seeking convenient parking solutions, the application prioritises security and strives for a seamless user experience.',
+    status: 'In Progress',
+    demoUrl: 'https://youtu.be/RI6kMXlcTUk'
   },
   {
     title: 'Performance Analysis',
-    description: 'Conducted a comparative analysis of cross-platform mobile app development frameworks. Evaluated performance metrics and critical factors of React Native, Flutter, and .NET Maui. Offered comprehensive insights to inform strategic decision-making in software development processes, developed informed and effective choices. Cannot make repo public until the work has been marked. Github links below:' ,
+    description: 'Conducted a comparative analysis of cross-platform mobile app development frameworks. Evaluated performance metrics and critical factors of React Native, Flutter, and .NET Maui. Offered comprehensive insights to inform strategic decision-making in software development processes, developed informed and effective choices. Cannot make repo public until the work has been marked. Github links below:',
     codeUrls: [
       { label: 'Flutter', url: 'https://github.com/M-K-B/Flutter_Y3_Project' },
       { label: 'React', url: 'https://github.com/M-K-B/ReactN_Y3_Project' },
@@ -36,7 +41,7 @@ const projects = [
     codeUrls: [
       { label: 'Deno js oak', url: 'https://github.com/M-K-B/Stock_system-Using-Deno-oak-inspired-by-koa-' },
       { label: 'Node js', url: 'https://github.com/M-K-B/Stock_mangement' },
-      
+
     ],
   },
   {
@@ -44,9 +49,6 @@ const projects = [
     description: 'Integrated an Arduino with Circuit Board 7 and the APDS-9008 Light Photo Sensor. Programmed in C++ to measure heart rates.',
     demoUrl: 'https://youtube.com/shorts/CUWScZbX1ck?si=5XN8tL_J7KChtHaH',
   },
-  
-  
-  // Add more projects here
 ];
 
 
@@ -56,60 +58,65 @@ function Project({ title, description, imageUrl, demoUrl, codeUrls, status }) {
 
   // Conditional rendering for elements based on data availability
   return (
-    <div className="project">
-      {title && <h3>{title}</h3>}
-      {imageUrl && <img src={imageUrl} alt={title} />}
+    <Card title={title} style={{ width: '100%', marginBottom: '20px' }}>
+      <div className="project">
+        {imageUrl && <img src={imageUrl} alt={title} style={{ marginBottom: '15px' }} />}
 
-      {descriptionSentences.length > 0 && (
-        <div className="description">
-          {descriptionSentences.map((sentence, index) => (
-            <p key={index}>
-              {/* Highlighting the sentence conditionally */}
-              {sentence.includes('Cannot make repo public') ? (
-                <span style={{ color: 'red' }}>{sentence}</span>
-              ) : (
-                sentence
-              )}
-            </p>
-          ))}
-        </div>
-      )}
-
-      <div className="project-links">
-        {status && (
-          <span className="project-status">{status}</span>
+        {descriptionSentences.length > 0 && (
+          <div className="description">
+            {descriptionSentences.map((sentence, index) => (
+              <p key={index}>
+                {/* Highlighting the sentence conditionally */}
+                {sentence.includes('Cannot make repo public') ? (
+                  <span style={{ color: 'red' }}>{sentence}</span>
+                ) : (
+                  sentence
+                )}
+              </p>
+            ))}
+          </div>
         )}
 
-        {demoUrl && (
-          <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="demo-link">
-            YouTube Demo
-          </a>
-        )}
-        {codeUrls && codeUrls.length > 0 && (
-          codeUrls.map((code, index) => (
-            <a key={index} href={code.url} target="_blank" rel="noopener noreferrer" className="code-link">
-              {code.label}
+        <div className="project-links">
+          {status && (
+            <span className="project-status">{status}</span>
+          )}
+
+          {demoUrl && (
+            <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="demo-link">
+              <YoutubeFilled style={{ fontSize: '24px', color: 'red', marginRight: '5px' }} />
+              Watch Demo
             </a>
-          ))
-        )}
+          )}
+          {codeUrls && codeUrls.length > 0 && (
+            <Space>
+              {codeUrls.map((code, index) => (
+                <a key={index} href={code.url} target="_blank" rel="noopener noreferrer" className="code-link">
+                  {code.label === '.NET MAUI' ? (
+                    <GithubFilled style={{ fontSize: '24px', color: '#000', marginRight: '5px' }} />
+                  ) : (
+                    <GithubFilled style={{ fontSize: '24px', color: '#000', marginRight: '5px' }} />
+                  )}
+                  {code.label}
+                </a>
+              ))}
+            </Space>
+          )}
+        </div>
       </div>
-    </div>
+    </Card>
   );
 }
 
 
-
-
-
-
-
-
 function Home() {
   return (
-    <section id="home" className="section home-section">
-      <div className="container">
-        <h2>Welcome to My Portfolio</h2>
-        <p className="hero-text"></p>
+    <section id="home" className="home-section">
+      <div className="container_intro">
+        <h1>Michael Bradshaw. </h1>
+        <div className='circlePic'>
+          <img src={profilePic} alt='Profile' />
+        </div>
       </div>
     </section>
   );
@@ -118,18 +125,21 @@ function Home() {
 function About() {
   return (
     <section id="about" className="section about-section">
-      <div className="container">
+      <div className="container_about">
         <h2>About Me</h2>
         <p>Dedicated computing student at Coventry University, committed to continuous learning and personal development. Strong foundation in software development and cybersecurity, keen to expand skill set and explore new technologies and methodologies. Through hands-on projects like Stock Management System and Security Audit, Showcased agility and adeptness in swiftly adapting and learning within evolving environments. Customer service roles at IKEA and Uber Boat Thames Clippers cultivated a impactful attitude towards learning and problem-solving. Career objective would be to secure role to immerse in new challenges, acquire new skills, and contribute to innovative projects pushing boundaries of technology.</p>
+
       </div>
     </section>
   );
 }
 
 function Portfolio() {
+
   return (
     <section id="portfolio" className="section portfolio-section">
       <div className="container">
+
         <h2>Portfolio</h2>
         <div className="projects">
           {projects.map((project, index) => (
@@ -139,6 +149,7 @@ function Portfolio() {
       </div>
     </section>
   );
+
 }
 
 function Contact() {
@@ -153,23 +164,23 @@ function Contact() {
           {/* Social media links */}
           <ul className="social-links">
             <li className="social-link">
-            <a
-  href="https://github.com/M-K-B"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <img src={gitLogo} alt="GitHub logo" className="contact-logo" />
-</a>
+              <a
+                href="https://github.com/M-K-B"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={gitLogo} alt="GitHub logo" className="contact-logo" />
+              </a>
             </li>
             <li className="social-link">
-            
-<a
-  href="https://www.linkedin.com/"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <img src={linkedinLogo} alt="LinkedIn logo" className="contact-logo" />
-</a>
+
+              <a
+                href="https://www.linkedin.com/in/michael-bradshaw-5a4a58148/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={linkedinLogo} alt="LinkedIn logo" className="contact-logo" />
+              </a>
             </li>
           </ul>
 
@@ -191,21 +202,38 @@ function Contact() {
 function App() {
   return (
     <div className="App">
-      <header className="header">
-        <div className="container">
-          <h1>My Portfolio</h1>
-        </div>
-      </header>
-      <nav className="navbar">
-        <div className="container">
+
+      <div className="container_nav">
+        <h1>MB.</h1>
+
+
+        <nav className="navbar">
+
           <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#contact">Contact</a></li>
+            <p>|</p>
+            <li>
+              <a href="https://www.linkedin.com/in/michael-bradshaw-5a4a58148/">
+                <img src={linkedinLogoWhite} alt="LinkedIn logo" className="nav-logo" />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/M-K-B">
+                <img src={gitLogoWhite} alt="GitHub logo" className="nav-logo" />
+              </a>
+            </li>
           </ul>
-        </div>
-      </nav>
+
+        </nav>
+
+
+      </div>
+
+
+
       <main>
         <Home />
         <About />
