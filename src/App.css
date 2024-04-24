@@ -1,22 +1,27 @@
 /* General styles */
 @font-face {
   font-family: 'Jersey 25';
-  src: url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
+  src: url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
   font-style: normal;
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Jersey 25', sans-serif;
   margin: 0;
   padding: 0;
+  background: linear-gradient(to right, #1a1a1a, #000);
 }
 
-.container {
+.container_portfolio {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 100px;
 }
 
+
+.container_portfolio h2 {
+  color: white;
+}
 .container_nav {
   background-color: #1a1a1a;
   display: flex;
@@ -89,16 +94,20 @@ img {
   border: 0.2rem solid black;
   width: 20rem;
   height: 20rem;
-  border-radius: 10rem;
+  border-radius: 12rem;
   overflow: hidden;
-  background-color: white;
+  background-color: #1a1a1a;
+  position: relative;
 }
 
 .circlePic img {
-  width: 100%;
+  width: 107%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
+  left: -10%;
 }
+
 
 .home-section {
   margin-top: 0;
@@ -115,6 +124,15 @@ img {
 .container_about {
   width: 50%;
 }
+
+.container_contact {
+  color: white;
+}
+
+.container_contact a {
+  color: white;
+}
+
 
 .container_about p {
   color: #fff;

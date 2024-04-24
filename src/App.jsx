@@ -4,7 +4,7 @@ import gitLogo from './assets/git.png';
 import linkedinLogo from './assets/linkedin.png';
 import linkedinLogoWhite from './assets/linkedin-icon_white.png'
 import gitLogoWhite from './assets/git_white.png'
-import profilePic from './assets/memoji.png'
+import profilePic from './assets/me2.jpg'
 import { YoutubeFilled, GithubFilled } from '@ant-design/icons';
 import { Card, Space } from 'antd';
 
@@ -138,7 +138,7 @@ function Portfolio() {
 
   return (
     <section id="portfolio" className="section portfolio-section">
-      <div className="container">
+      <div className="container_portfolio">
 
         <h2>Portfolio</h2>
         <div className="projects">
@@ -155,7 +155,7 @@ function Portfolio() {
 function Contact() {
   return (
     <section id="contact" className="section contact-section">
-      <div className="container">
+      <div className="container_contact">
         <h2>Contact Me</h2>
         <p>Feel free to take a look at my Github or connect with me on linkedin or send me an email.</p>
 
@@ -169,7 +169,7 @@ function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={gitLogo} alt="GitHub logo" className="contact-logo" />
+                <img src={gitLogoWhite} alt="GitHub logo" className="contact-logo" />
               </a>
             </li>
             <li className="social-link">
@@ -179,19 +179,18 @@ function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={linkedinLogo} alt="LinkedIn logo" className="contact-logo" />
+                <img src={linkedinLogoWhite} alt="LinkedIn logo" className="contact-logo" />
               </a>
             </li>
           </ul>
 
-          {/* Email address */}
+          
           <a href="mailto:youremail@example.com" className="email-link">
             michael.bradshaw00@icloud.com
           </a>
         </div>
 
-        {/* Contact form (optional, add if needed) */}
-        {/* ... your contact form implementation here ... */}
+        
       </div>
     </section>
   );
