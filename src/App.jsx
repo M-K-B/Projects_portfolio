@@ -4,7 +4,10 @@ import './App.css';
 
 // ─── Profile photo ───
 // Make sure me2.jpg is still in src/assets/
-import profilePic from './assets/me2.jpg';
+import profilePic from './assets/me.jpg';
+import hutanoHome    from './assets/hutano-home.png';
+import hutanoProfile from './assets/hutano-profile.png';
+import hutanoMap     from './assets/hutano-map.png';
 
 // ─── Project screenshots ───
 // 1. Take screenshots of each project (app running, or GitHub README)
@@ -37,16 +40,17 @@ const projects = [
     featured: true,
   },
   {
-    index: '002',
-    title: 'Hutano',
-    description:
-      'iOS fitness tracking app built in SwiftUI with GPS route recording, Mapbox integration, HealthKit sync, interactive Swift Charts, and Google Sign-In via ASWebAuthenticationSession. MVVM architecture with a Supabase backend.',
-    tags: ['Swift', 'SwiftUI', 'Mapbox', 'HealthKit', 'Supabase', 'MVVM'],
-    codeUrls: [{ label: 'GitHub', url: 'https://github.com/M-K-B' }],
-    screenshot: null, // replace null with: hutanoScreen
-    type: 'iOS · Mobile',
-    featured: false,
-  },
+  index: '002',
+  title: 'Hutano',
+  description:
+    'iOS fitness tracking app built in SwiftUI with GPS route recording, Mapbox integration, HealthKit sync, interactive Swift Charts, and Google Sign-In via ASWebAuthenticationSession. MVVM architecture with a Supabase backend.',
+  tags: ['Swift', 'SwiftUI', 'Mapbox', 'HealthKit', 'Supabase', 'MVVM'],
+  codeUrls: [{ label: 'GitHub', url: 'https://github.com/M-K-B' }],
+  screenshot: hutanoHome,       // primary — used as the card header image
+  screenshots: [hutanoHome, hutanoProfile, hutanoMap], // all three for the strip
+  type: 'iOS · Mobile',
+  featured: false,
+},
   {
     index: '003',
     title: 'RESTful Currency API',
@@ -173,7 +177,7 @@ function Nav() {
   return (
     <nav className={scrolled ? 'scrolled' : ''}>
       <a href="#hero" className="logo" onClick={e => scrollTo(e, '#hero')}>
-        M<span className="accent">.</span>Bradshaw
+        Michael<span className="accent">.</span>Bradshaw
       </a>
       <ul>
         {links.map(([href, label]) => (
@@ -298,28 +302,38 @@ function About() {
 // ─────────────────────────────────────────────
 //  Project card
 // ─────────────────────────────────────────────
+// ─────────────────────────────────────────────
+//  Project card
+// ─────────────────────────────────────────────
 function ProjectCard({ project, cardIndex }) {
-  const { title, description, tags, demoUrl, codeUrls, screenshot, type, featured } = project;
+  const { title, description, tags, demoUrl, codeUrls, screenshot, screenshots, type, featured } = project;
 
   return (
-    // Stagger delay based on position in the grid
     <Reveal delay={cardIndex * 80} className={`project-card-wrap${featured ? ' featured' : ''}`}>
       <div className={`project-card${featured ? ' featured' : ''}`}>
 
-        {/* Screenshot section */}
-        {screenshot ? (
-          // Real screenshot — shown when image is imported and passed in
+        {/* Multi-screenshot strip — shown when screenshots array is provided (e.g. Hutano) */}
+        {screenshots?.length > 0 ? (
+          <div className="project-screenshot-strip">
+            {screenshots.map((src, i) => (
+              <div key={i} className="strip-item">
+                <img src={src} alt={`${title} screen ${i + 1}`} />
+              </div>
+            ))}
+          </div>
+        ) : screenshot ? (
+          // Single screenshot — used for web/desktop projects
           <div className="project-screenshot">
             <img src={screenshot} alt={`${title} screenshot`} />
           </div>
         ) : (
-          // Placeholder — remove once you add the real screenshot
+          // Placeholder — shown until a real screenshot is added
           <div className="project-screenshot placeholder">
             <span className="mono">Screenshot coming soon</span>
           </div>
         )}
 
-        {/* Text content */}
+        {/* Card text content */}
         <div className="project-body">
           <div className="project-meta">
             <span className="project-index">{project.index}</span>
@@ -360,8 +374,7 @@ function ProjectCard({ project, cardIndex }) {
   );
 }
 
-
-// PropTypes for ProjectCard — covers all fields destructured from project
+// PropTypes — must be AFTER the function, not inside it
 ProjectCard.propTypes = {
   cardIndex: PropTypes.number.isRequired,
   project: PropTypes.shape({
@@ -370,7 +383,8 @@ ProjectCard.propTypes = {
     description: PropTypes.string.isRequired,
     type:        PropTypes.string.isRequired,
     featured:    PropTypes.bool,
-    screenshot:  PropTypes.string,           // imported image or null
+    screenshot:  PropTypes.string,
+    screenshots: PropTypes.arrayOf(PropTypes.string), // add this for the strip
     tags:        PropTypes.arrayOf(PropTypes.string),
     demoUrl:     PropTypes.string,
     codeUrls:    PropTypes.arrayOf(
@@ -381,7 +395,6 @@ ProjectCard.propTypes = {
     ),
   }).isRequired,
 };
-
 
 // ─────────────────────────────────────────────
 //  Projects section

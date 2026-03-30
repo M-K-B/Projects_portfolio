@@ -2,7 +2,7 @@
    Design Tokens
    ───────────────────────────────────────────── */
 :root {
-  --bg:           #080808;      /* near-black page background */
+  --bg: #080808;    /* near-black page background */
   --bg-alt:       #111111;      /* slightly lifted card surface */
   --border:       #1f1f1f;      /* default border colour */
   --text:         #e8e8e2;      /* warm off-white body text */
@@ -194,7 +194,7 @@ nav ul a:hover { color: var(--accent); }
 
 /* Ghost "MKB" text behind hero content */
 .hero::after {
-  content: 'MKB';
+  content: 'MIKE B';
   position: absolute;
   bottom: -0.1em;
   right: -0.05em;
@@ -808,4 +808,35 @@ footer {
     gap: 0.8rem;
     text-align: center;
   }
+}
+
+/* Mobile screenshot strip — side by side phone screens */
+.project-screenshot-strip {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem 2rem 0;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  /* Hide scrollbar but keep scroll on mobile */
+  scrollbar-width: none;
+}
+
+.project-screenshot-strip::-webkit-scrollbar { display: none; }
+
+/* Each phone screenshot — constrained height, portrait aspect */
+.strip-item {
+  flex-shrink: 0;
+  width: 160px;        /* narrow enough to show all 3 comfortably */
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  /* Subtle drop shadow to lift the phone screens off the background */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.strip-item img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
