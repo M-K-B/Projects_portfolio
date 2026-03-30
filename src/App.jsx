@@ -1,34 +1,31 @@
-import  { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types'; // used for ESLint prop-types validation
+import { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types'; // satisfies react/prop-types ESLint rule
 import './App.css';
 
 // ─── Profile photo ───
-// Make sure me2.jpg is still in src/assets/
 import profilePic from './assets/me.jpg';
+
+// ─── Hutano screenshots (iOS app) ───
 import hutanoHome    from './assets/hutano-home.png';
-import hutanoProfile from './assets/hutano-profile.png';
+import hutanoWeight  from './assets/hutano-weight.png';
+import hutanoSteps   from './assets/hutano-steps.png';
 import hutanoMap     from './assets/hutano-map.png';
-import hutanoWeight  from './assets/hutano-weight.png'; // weight chart screen
-import hutanoSteps   from './assets/hutano-steps.png';  
+import hutanoProfile from './assets/hutano-profile.png';
 
-// ─── Project screenshots ───
-// 1. Take screenshots of each project (app running, or GitHub README)
-// 2. Drop them into src/assets/screenshots/
-// 3. Uncomment the relevant import below
-// 4. Set screenshot: <importedVar> on the matching project in the array
-
-// import netcaseScreen  from './assets/screenshots/netcase.png';
-// import hutanoScreen   from './assets/screenshots/hutano.png';
-// import currencyScreen from './assets/screenshots/currency.png';
-// import stockScreen    from './assets/screenshots/stock.png';
-// import mauiScreen     from './assets/screenshots/maui.png';
-// import heartScreen    from './assets/screenshots/heart.png';
+// ─── NetCase screenshots (web app) ───
+import netcaseCases      from './assets/netcase-cases.png';
+import netcaseResolution from './assets/netcase-resolution.png';
+import netcaseHistory    from './assets/netcase-history.png';
+import netcaseMap        from './assets/netcase-map.png';
 
 
-// ─── Projects data ───
-// Add/remove projects here — components read from this array automatically.
-// screenshot: null  →  shows a "Screenshot coming soon" placeholder
-// featured: true    →  gives the card a wider layout (use for your best work)
+// ─────────────────────────────────────────────
+//  Projects data
+//  screenshot: null  → shows a placeholder
+//  featured: true    → wider card layout
+//  screenshots: []   → scrollable strip of images
+//  liveUrl           → adds a "Live Demo" button
+// ─────────────────────────────────────────────
 const projects = [
   {
     index: '001',
@@ -37,22 +34,26 @@ const projects = [
       'Multi-tenant case management and logistics platform. Clean Architecture C#/.NET backend with JWT/ES256 auth via Supabase, React/TypeScript frontend deployed to Vercel, and self-hosted on a Raspberry Pi via Cloudflare Tunnel with GitHub Actions CI/CD.',
     tags: ['C# / .NET', 'React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Docker', 'EF Core'],
     codeUrls: [{ label: 'GitHub', url: 'https://github.com/M-K-B' }],
-    screenshot: null, // replace null with: netcaseScreen
+    liveUrl: 'https://cases-frontend-jh39-m-k-bs-projects.vercel.app?_vercel_share=pUhRoupG8mxiUGpxOweMUDNHxyniUSaj',
+    screenshot: netcaseCases,
+    // Cases list → resolution flow → history log → delivery map
+    screenshots: [netcaseCases, netcaseResolution, netcaseHistory, netcaseMap],
     type: 'Full-stack · Backend',
     featured: true,
   },
   {
-  index: '002',
-  title: 'Hutano',
-  description: 'iOS fitness tracking app built in SwiftUI with GPS route recording, Mapbox integration, HealthKit sync, interactive Swift Charts, and Google Sign-In via ASWebAuthenticationSession. MVVM architecture with a Supabase backend.',
-  tags: ['Swift', 'SwiftUI', 'Mapbox', 'HealthKit', 'Supabase', 'MVVM'],
-  codeUrls: [{ label: 'GitHub', url: 'https://github.com/M-K-B' }],
-  screenshot: hutanoHome,
-  // All 5 screens — home, charts (weight + steps), map, profile
-  screenshots: [hutanoHome, hutanoWeight, hutanoSteps, hutanoMap, hutanoProfile],
-  type: 'iOS · Mobile',
-  featured: false,
-},
+    index: '002',
+    title: 'Hutano',
+    description:
+      'iOS fitness tracking app built in SwiftUI with GPS route recording, Mapbox integration, HealthKit sync, interactive Swift Charts, and Google Sign-In via ASWebAuthenticationSession. MVVM architecture with a Supabase backend.',
+    tags: ['Swift', 'SwiftUI', 'Mapbox', 'HealthKit', 'Supabase', 'MVVM'],
+    codeUrls: [{ label: 'GitHub', url: 'https://github.com/M-K-B' }],
+    screenshot: hutanoHome,
+    // Home → weight chart → steps chart → map → profile
+    screenshots: [hutanoHome, hutanoWeight, hutanoSteps, hutanoMap, hutanoProfile],
+    type: 'iOS · Mobile',
+    featured: false,
+  },
   {
     index: '003',
     title: 'RESTful Currency API',
@@ -60,30 +61,29 @@ const projects = [
       'RESTful API for accessing real-time currency exchange rates. Built with Koa.js and a MySQL database, supporting currency retrieval, conversion, and flexible response formats.',
     tags: ['Node.js', 'Koa.js', 'MySQL', 'REST API'],
     demoUrl: 'https://youtu.be/r2ETrv2pbP4',
-    screenshot: null, // replace null with: currencyScreen
+    screenshot: null,
     type: 'Backend · API',
     featured: false,
   },
- 
   {
-    index: '005',
+    index: '004',
     title: '.NET MAUI Parking App',
     description:
       'Online parking application built with .NET MAUI, integrating Supabase for authentication, data storage, and real-time updates. Targets a seamless cross-platform mobile experience.',
     tags: ['.NET MAUI', 'Supabase', 'C#', 'Cross-platform'],
     demoUrl: 'https://youtu.be/RI6kMXlcTUk',
-    screenshot: null, // replace null with: mauiScreen
+    screenshot: null,
     type: 'Mobile · Cross-platform',
     featured: false,
   },
   {
-    index: '006',
+    index: '005',
     title: 'Heart Rate Sensor',
     description:
       'Hardware project integrating an Arduino with Circuit Board 7 and the APDS-9008 light photo sensor. Programmed in C++ to measure and display heart rate data in real time.',
     tags: ['Arduino', 'C++', 'IoT', 'Hardware'],
     demoUrl: 'https://youtube.com/shorts/CUWScZbX1ck',
-    screenshot: null, // replace null with: heartScreen
+    screenshot: null,
     type: 'Hardware · IoT',
     featured: false,
   },
@@ -91,11 +91,10 @@ const projects = [
 
 
 // ─────────────────────────────────────────────
-//  Utilities
+//  useReveal hook
+//  Watches an element with IntersectionObserver.
+//  Returns [ref, isVisible] — attach ref to the element to animate.
 // ─────────────────────────────────────────────
-
-// useReveal — watches an element with IntersectionObserver.
-// Returns [ref, isVisible]. Attach ref to the DOM element you want animated.
 function useReveal(threshold = 0.12) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -108,7 +107,7 @@ function useReveal(threshold = 0.12) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          observer.unobserve(el); // fire once, then stop watching
+          observer.unobserve(el); // fire once then stop watching
         }
       },
       { threshold, rootMargin: '0px 0px -40px 0px' }
@@ -121,8 +120,12 @@ function useReveal(threshold = 0.12) {
   return [ref, visible];
 }
 
-// Reveal — wraps children in a div that fades up when scrolled into view.
-// delay (ms) lets you stagger sibling elements.
+
+// ─────────────────────────────────────────────
+//  Reveal component
+//  Wraps children in a div that fades up on scroll.
+//  delay (ms) staggers sibling elements.
+// ─────────────────────────────────────────────
 function Reveal({ children, delay = 0, className = '' }) {
   const [ref, visible] = useReveal();
 
@@ -137,7 +140,6 @@ function Reveal({ children, delay = 0, className = '' }) {
   );
 }
 
-// PropTypes — satisfies the react/prop-types ESLint rule
 Reveal.propTypes = {
   children:  PropTypes.node.isRequired,
   delay:     PropTypes.number,
@@ -151,15 +153,15 @@ Reveal.propTypes = {
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
 
-  // Darken the nav border slightly once user scrolls
+  // Darken nav border once user scrolls past 60px
   useEffect(() => {
-    // Using globalThis instead of window — works in browser, Web Workers, and avoids Deno lint warnings
+    // globalThis instead of window — avoids Deno lint warnings
     const onScroll = () => setScrolled(globalThis.scrollY > 60);
     globalThis.addEventListener('scroll', onScroll, { passive: true });
     return () => globalThis.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Smooth scroll with offset for fixed nav height
+  // Smooth scroll with fixed nav height offset
   const scrollTo = (e, id) => {
     e.preventDefault();
     const target = document.querySelector(id);
@@ -206,10 +208,10 @@ function Hero() {
     <section id="hero" className="hero">
       <div className="container hero-inner">
 
-        {/* Small labelled tag above name — animates in via CSS keyframe */}
+        {/* Small label above name — animates in via CSS keyframe */}
         <div className="hero-label">Software Engineer — London</div>
 
-        {/* Main name — large, two-line, second line offset right */}
+        {/* Large editorial name — second line offset right */}
         <h1 className="hero-name">
           Michael
           <span className="line2">Bradshaw<span className="accent">.</span></span>
@@ -245,10 +247,10 @@ function Hero() {
 // ─────────────────────────────────────────────
 function About() {
   const stats = [
-    { num: '2:1',  label: 'BSc Computing' },
-    { num: '3+',   label: 'Languages' },
-    { num: '6+',   label: 'Projects' },
-    { num: 'SE',   label: 'South London' },
+    { num: '2:1', label: 'BSc Computing' },
+    { num: '3+',  label: 'Languages' },
+    { num: '5+',  label: 'Projects' },
+    { num: 'SE',  label: 'South London' },
   ];
 
   return (
@@ -302,19 +304,25 @@ function About() {
 
 
 // ─────────────────────────────────────────────
-//  Project card
-// ─────────────────────────────────────────────
-// ─────────────────────────────────────────────
-//  Project card
+//  ProjectCard
 // ─────────────────────────────────────────────
 function ProjectCard({ project, cardIndex }) {
-  const { title, description, tags, demoUrl, codeUrls, screenshot, screenshots, type, featured } = project;
+  // All destructuring happens inside the component — never at module level
+  const {
+    title, description, tags,
+    demoUrl, liveUrl, codeUrls,
+    screenshot, screenshots,
+    type, featured,
+  } = project;
 
   return (
     <Reveal delay={cardIndex * 80} className={`project-card-wrap${featured ? ' featured' : ''}`}>
       <div className={`project-card${featured ? ' featured' : ''}`}>
 
-        {/* Multi-screenshot strip — shown when screenshots array is provided (e.g. Hutano) */}
+        {/* Screenshot area:
+            1. screenshots array → scrollable strip
+            2. single screenshot → full-width image
+            3. null             → dashed placeholder */}
         {screenshots?.length > 0 ? (
           <div className="project-screenshot-strip">
             {screenshots.map((src, i) => (
@@ -324,18 +332,16 @@ function ProjectCard({ project, cardIndex }) {
             ))}
           </div>
         ) : screenshot ? (
-          // Single screenshot — used for web/desktop projects
           <div className="project-screenshot">
             <img src={screenshot} alt={`${title} screenshot`} />
           </div>
         ) : (
-          // Placeholder — shown until a real screenshot is added
           <div className="project-screenshot placeholder">
             <span className="mono">Screenshot coming soon</span>
           </div>
         )}
 
-        {/* Card text content */}
+        {/* Card body */}
         <div className="project-body">
           <div className="project-meta">
             <span className="project-index">{project.index}</span>
@@ -354,13 +360,21 @@ function ProjectCard({ project, cardIndex }) {
             </div>
           )}
 
-          {/* Demo + code links */}
+          {/* Action links */}
           <div className="project-links-row">
+            {/* Live deployed app — only shown when liveUrl is set */}
+            {liveUrl && (
+              <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="link-btn demo">
+                ↗ Live Demo
+              </a>
+            )}
+            {/* YouTube walkthrough */}
             {demoUrl && (
               <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="link-btn demo">
                 ▶ Watch Demo
               </a>
             )}
+            {/* GitHub repo links */}
             {codeUrls?.map(({ label, url }) => (
               <a key={label} href={url} target="_blank" rel="noopener noreferrer" className="link-btn code">
                 ⌥ {label}
@@ -369,14 +383,14 @@ function ProjectCard({ project, cardIndex }) {
           </div>
         </div>
 
-        {/* Arrow decoration — top right corner */}
+        {/* Arrow decoration — top right */}
         <span className="project-arrow" aria-hidden>↗</span>
       </div>
     </Reveal>
   );
 }
 
-// PropTypes — must be AFTER the function, not inside it
+// PropTypes — covers every field used above
 ProjectCard.propTypes = {
   cardIndex: PropTypes.number.isRequired,
   project: PropTypes.shape({
@@ -386,9 +400,10 @@ ProjectCard.propTypes = {
     type:        PropTypes.string.isRequired,
     featured:    PropTypes.bool,
     screenshot:  PropTypes.string,
-    screenshots: PropTypes.arrayOf(PropTypes.string), // add this for the strip
+    screenshots: PropTypes.arrayOf(PropTypes.string),
     tags:        PropTypes.arrayOf(PropTypes.string),
     demoUrl:     PropTypes.string,
+    liveUrl:     PropTypes.string,
     codeUrls:    PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
@@ -397,6 +412,7 @@ ProjectCard.propTypes = {
     ),
   }).isRequired,
 };
+
 
 // ─────────────────────────────────────────────
 //  Projects section
@@ -427,7 +443,6 @@ function Projects() {
 //  Skills section
 // ─────────────────────────────────────────────
 function Skills() {
-  // Update these as your stack grows
   const groups = [
     {
       label: 'Languages',
@@ -537,7 +552,7 @@ function Footer() {
     <footer>
       <span className="mono">© {new Date().getFullYear()} Michael Bradshaw</span>
       <span className="mono">Built with React</span>
-      {/* Pulsing dot + "Open to work" status */}
+      {/* Pulsing dot + open to work status */}
       <span className="footer-status mono">
         <span className="dot" />
         Open to work
@@ -548,7 +563,7 @@ function Footer() {
 
 
 // ─────────────────────────────────────────────
-//  Root App — compose all sections
+//  Root App
 // ─────────────────────────────────────────────
 export default function App() {
   return (

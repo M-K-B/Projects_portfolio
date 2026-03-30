@@ -1,8 +1,11 @@
+/* @import MUST be the very first line — nothing can precede it, not even comments */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap');
+
 /* ─────────────────────────────────────────────
    Design Tokens
    ───────────────────────────────────────────── */
 :root {
-  --bg: #080808;    /* near-black page background */
+  --bg:           #080808;      /* near-black page background */
   --bg-alt:       #111111;      /* slightly lifted card surface */
   --border:       #1f1f1f;      /* default border colour */
   --text:         #e8e8e2;      /* warm off-white body text */
@@ -12,11 +15,6 @@
   --font-mono:    'JetBrains Mono', monospace;
   --font-body:    'Crimson Pro', serif;
 }
-
-/* ─────────────────────────────────────────────
-   Google Fonts import
-   ───────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap');
 
 /* ─────────────────────────────────────────────
    Reset & Base
@@ -150,7 +148,7 @@ nav {
   transition: border-color 0.3s;
 }
 
-/* Slightly more visible border once scrolled — set via JS className */
+/* Slightly more visible border once scrolled — toggled via JS className */
 nav.scrolled {
   border-bottom-color: #2a2a2a;
 }
@@ -192,7 +190,7 @@ nav ul a:hover { color: var(--accent); }
   border-bottom: 1px solid var(--border);
 }
 
-/* Ghost "MKB" text behind hero content */
+/* Ghost "MIKE B" text behind hero content */
 .hero::after {
   content: 'MIKE B';
   position: absolute;
@@ -444,8 +442,9 @@ section {
   gap: 1.5rem;
 }
 
-/* project-card-wrap stretches the featured card full width */
-.project-card-wrap        { display: contents; }
+/* project-card-wrap — display:contents so the card sits directly in the grid.
+   .featured overrides to display:block so it spans full width. */
+.project-card-wrap         { display: contents; }
 .project-card-wrap.featured { display: block; }
 
 .project-card {
@@ -461,19 +460,19 @@ section {
 
 .project-card:hover { border-color: var(--accent); }
 
-/* Featured card — full width, stacked layout */
+/* Featured card — full width, single column */
 .project-card.featured {
   grid-template-columns: 1fr;
 }
 
-/* Screenshot panel */
+/* ── Single screenshot panel (non-strip) ── */
 .project-screenshot {
   width: 100%;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
   overflow: hidden;
   max-height: 340px;
-  grid-column: 1 / -1; /* stretch across both columns */
+  grid-column: 1 / -1;
 }
 
 .project-screenshot img {
@@ -484,10 +483,10 @@ section {
 }
 
 .project-card:hover .project-screenshot img {
-  transform: scale(1.02); /* subtle zoom on hover */
+  transform: scale(1.02);
 }
 
-/* Placeholder shown when screenshot is null */
+/* Placeholder — dashed box shown when screenshot is null */
 .project-screenshot.placeholder {
   display: flex;
   align-items: center;
@@ -501,7 +500,7 @@ section {
   color: var(--border);
 }
 
-/* Body content below screenshot */
+/* ── Card body (below screenshot) ── */
 .project-body {
   padding: 2.5rem;
 }
@@ -550,7 +549,7 @@ section {
   line-height: 1.65;
 }
 
-/* Tech stack pills row */
+/* Tech stack pills */
 .project-stack {
   margin-top: 1.5rem;
   display: flex;
@@ -569,7 +568,7 @@ section {
   transition: color 0.2s, border-color 0.2s;
 }
 
-/* Links row (demo + code) */
+/* Links row */
 .project-links-row {
   margin-top: 1.5rem;
   display: flex;
@@ -614,6 +613,87 @@ section {
 .project-card:hover .project-arrow {
   color: var(--accent);
   transform: translate(3px, -3px);
+}
+
+/* ─────────────────────────────────────────────
+   Screenshot strip — Hutano (portrait phone screens)
+   ───────────────────────────────────────────── */
+.project-screenshot-strip {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem 2rem 0;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none; /* hide scrollbar on Firefox */
+}
+
+.project-screenshot-strip::-webkit-scrollbar { display: none; }
+
+/* Each phone frame */
+.strip-item {
+  flex-shrink: 0;
+  width: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.strip-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────
+   Screenshot grid — NetCase (landscape desktop screens)
+   Featured cards use a 2×2 grid instead of the portrait strip.
+   ───────────────────────────────────────────── */
+.project-card.featured .project-screenshot-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 equal columns */
+  gap: 0;
+  padding: 0;
+  overflow: visible;             /* no horizontal scroll */
+  background: #000;
+  border-bottom: 1px solid var(--border);
+  max-height: 360px;
+}
+
+/* Each grid cell */
+.project-card.featured .strip-item {
+  width: 100%;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* Remove right border from 2nd column */
+.project-card.featured .strip-item:nth-child(2n) {
+  border-right: none;
+}
+
+/* Remove bottom border from last row (items 3 and 4) */
+.project-card.featured .strip-item:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+/* Landscape images — fixed height, crop from top-left to show UI chrome */
+.project-card.featured .strip-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.project-card.featured:hover .strip-item img {
+  transform: scale(1.03);
 }
 
 /* ─────────────────────────────────────────────
@@ -794,7 +874,7 @@ footer {
 
   nav ul { gap: 1.5rem; }
 
-  /* Hide ghost MKB text on small screens */
+  /* Hide ghost text on small screens — too large */
   .hero::after { display: none; }
 
   .project-card {
@@ -808,35 +888,14 @@ footer {
     gap: 0.8rem;
     text-align: center;
   }
-}
 
-/* Mobile screenshot strip — side by side phone screens */
-.project-screenshot-strip {
-  display: flex;
-  gap: 1rem;
-  padding: 2rem 2rem 0;
-  background: var(--bg-alt);
-  border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-  /* Hide scrollbar but keep scroll on mobile */
-  scrollbar-width: none;
-}
+  /* Featured grid collapses to single column on mobile */
+  .project-card.featured .project-screenshot-strip {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
 
-.project-screenshot-strip::-webkit-scrollbar { display: none; }
-
-/* Each phone screenshot — constrained height, portrait aspect */
-.strip-item {
-  flex-shrink: 0;
-  width: 160px;        /* narrow enough to show all 3 comfortably */
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  /* Subtle drop shadow to lift the phone screens off the background */
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-
-.strip-item img {
-  width: 100%;
-  height: auto;
-  display: block;
+  .project-card.featured .strip-item img {
+    height: 200px;
+  }
 }
