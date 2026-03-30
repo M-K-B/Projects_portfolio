@@ -8,6 +8,8 @@ import profilePic from './assets/me.jpg';
 import hutanoHome    from './assets/hutano-home.png';
 import hutanoProfile from './assets/hutano-profile.png';
 import hutanoMap     from './assets/hutano-map.png';
+import hutanoWeight  from './assets/hutano-weight.png'; // weight chart screen
+import hutanoSteps   from './assets/hutano-steps.png';  
 
 // ─── Project screenshots ───
 // 1. Take screenshots of each project (app running, or GitHub README)
@@ -42,12 +44,12 @@ const projects = [
   {
   index: '002',
   title: 'Hutano',
-  description:
-    'iOS fitness tracking app built in SwiftUI with GPS route recording, Mapbox integration, HealthKit sync, interactive Swift Charts, and Google Sign-In via ASWebAuthenticationSession. MVVM architecture with a Supabase backend.',
+  description: 'iOS fitness tracking app built in SwiftUI with GPS route recording, Mapbox integration, HealthKit sync, interactive Swift Charts, and Google Sign-In via ASWebAuthenticationSession. MVVM architecture with a Supabase backend.',
   tags: ['Swift', 'SwiftUI', 'Mapbox', 'HealthKit', 'Supabase', 'MVVM'],
   codeUrls: [{ label: 'GitHub', url: 'https://github.com/M-K-B' }],
-  screenshot: hutanoHome,       // primary — used as the card header image
-  screenshots: [hutanoHome, hutanoProfile, hutanoMap], // all three for the strip
+  screenshot: hutanoHome,
+  // All 5 screens — home, charts (weight + steps), map, profile
+  screenshots: [hutanoHome, hutanoWeight, hutanoSteps, hutanoMap, hutanoProfile],
   type: 'iOS · Mobile',
   featured: false,
 },
