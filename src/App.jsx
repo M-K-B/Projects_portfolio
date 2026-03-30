@@ -179,7 +179,7 @@ function Nav() {
   return (
     <nav className={scrolled ? 'scrolled' : ''}>
       <a href="#hero" className="logo" onClick={e => scrollTo(e, '#hero')}>
-        Michael<span className="accent">.</span>Bradshaw
+        M<span className="accent">.</span>B
       </a>
       <ul>
         {links.map(([href, label]) => (
