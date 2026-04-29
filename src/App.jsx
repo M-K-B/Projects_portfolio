@@ -34,7 +34,7 @@ const projects = [
       'Multi-tenant case management and logistics platform. Clean Architecture C#/.NET backend with JWT/ES256 auth via Supabase, React/TypeScript frontend deployed to Vercel, and self-hosted on a Raspberry Pi via Cloudflare Tunnel with GitHub Actions CI/CD.',
     tags: ['C# / .NET', 'React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Docker', 'EF Core'],
     codeUrls: [{ label: 'GitHub', url: 'https://github.com/M-K-B' }],
-    liveUrl: 'https://cases-frontend-jh39-m-k-bs-projects.vercel.app?_vercel_share=pUhRoupG8mxiUGpxOweMUDNHxyniUSaj',
+    liveUrl: 'https://cases-frontend-jh39-m-k-bs-projects.vercel.app?_vercel_share=B7AjIUZKBt3xXu6XxxHZlHSAEorI71gl',
     screenshot: netcaseCases,
     // Cases list → resolution flow → history log → delivery map
     screenshots: [netcaseCases, netcaseResolution, netcaseHistory, netcaseMap],
