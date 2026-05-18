@@ -6,12 +6,13 @@ import './App.css';
 import profilePic from './assets/me.jpg';
 
 // ─── Hutano screenshots (iOS app) ───
-import hutanoHome    from './assets/hutano-home.png';
-import hutanoWeight  from './assets/hutano-weight.png';
-import hutanoSteps   from './assets/hutano-steps.png';
-import hutanoMap     from './assets/hutano-map.png';
-import hutanoProfile from './assets/hutano-profile.png';
-
+import hutanoHome    from './assets/hutano-home.png';    // Home dashboard with stats
+import hutanoSteps   from './assets/hutano-steps.png';   // Steps chart
+import hutanoMap     from './assets/hutano-map.png';     // Mapbox run tracking
+import hutanoGym     from './assets/hutano-gym.png';     // Exercise library
+import hutanoWorkout from './assets/hutano-workout.png'; // Active workout with sets
+import hutanoProfile from './assets/hutano-profile.png'; 
+import hutanoProfile1 from './assets/hutano-profile_1.png'; 
 // ─── NetCase screenshots (web app) ───
 import netcaseCases      from './assets/netcase-cases.png';
 import netcaseResolution from './assets/netcase-resolution.png';
@@ -45,15 +46,15 @@ const projects = [
     index: '002',
     title: 'Hutano',
     description:
-      'iOS fitness tracking app built in SwiftUI with GPS route recording, Mapbox integration, HealthKit sync, interactive Swift Charts, and Google Sign-In via ASWebAuthenticationSession. MVVM architecture with a Supabase backend.',
-    tags: ['Swift', 'SwiftUI', 'Mapbox', 'HealthKit', 'Supabase', 'MVVM'],
+      'Cross-platform fitness tracking app built with React Native and Expo. Features workout logging with set/rep tracking, an exercise library with muscle group tags, Mapbox GPS route recording, step count charts, calorie deficit goals, and QR-based friend connections. Supabase backend with Google and Apple Sign In. Originally prototyped in SwiftUI — migrated to React Native as a solo developer to maintain a single codebase across iOS and Android.',
+    tags: ['React Native', 'Expo', 'TypeScript', 'Mapbox', 'Supabase'],
     codeUrls: [{ label: 'GitHub', url: 'https://github.com/M-K-B' }],
     screenshot: hutanoHome,
-    // Home → weight chart → steps chart → map → profile
-    screenshots: [hutanoHome, hutanoWeight, hutanoSteps, hutanoMap, hutanoProfile],
-    type: 'iOS · Mobile',
+    // Home → steps chart → gym library → active workout → map → profile
+    screenshots: [hutanoHome, hutanoSteps, hutanoGym, hutanoWorkout, hutanoMap, hutanoProfile, hutanoProfile1],
+    type: 'Mobile · Cross-platform',
     featured: false,
-  },
+},
   {
     index: '003',
     title: 'RESTful Currency API',
@@ -270,7 +271,7 @@ function About() {
             <p>
               I&apos;m a <strong>Computing graduate</strong> from Coventry University (2:1, 2024),
               based in South London. I build across the full stack — from{' '}
-              <strong>Swift/SwiftUI iOS apps</strong> to <strong>C#/.NET APIs</strong> to{' '}
+              <strong>React Native mobile apps</strong> to <strong>C#/.NET APIs</strong> to{' '}
               <strong>React/TypeScript frontends</strong>.
             </p>
             <p>
@@ -301,7 +302,6 @@ function About() {
     </section>
   );
 }
-
 
 // ─────────────────────────────────────────────
 //  ProjectCard
@@ -448,10 +448,10 @@ function Skills() {
       label: 'Languages',
       items: ['C# / .NET', 'Swift', 'TypeScript', 'Python', 'SQL'],
     },
-    {
-      label: 'Frontend & Mobile',
-      items: ['React / Vite', 'SwiftUI', 'HTML / CSS', 'Tailwind CSS'],
-    },
+   {
+  label: 'Frontend & Mobile',
+  items: ['React / Vite', 'React Native / Expo', 'HTML / CSS', 'Tailwind CSS'],
+},
     {
       label: 'Backend & Data',
       items: ['ASP.NET Core', 'Entity Framework Core', 'Supabase / PostgreSQL', 'REST API design', 'JWT Auth'],
@@ -498,7 +498,7 @@ function Skills() {
 function Contact() {
   const links = [
     { icon: '⌥', label: 'GitHub — M-K-B',   url: 'https://github.com/M-K-B' },
-    { icon: '▣', label: 'LinkedIn',           url: 'https://www.linkedin.com/in/michael-bradshaw-5a4a58148/' },
+    { icon: '▣', label: 'LinkedIn', url: 'https://www.linkedin.com/in/michael-bradshaw-dev/' },
     { icon: '◈', label: 'Projects Portfolio', url: 'https://m-k-b.github.io/Projects_portfolio/' },
     { icon: '▶', label: 'YouTube',            url: 'https://www.youtube.com/@MichaelBradshaw' },
   ];
